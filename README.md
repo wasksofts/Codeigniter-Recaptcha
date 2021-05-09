@@ -2,14 +2,18 @@
 Google v2 Codeigniter Recaptcha
 
 # Controller
-    $this->form_validation->set_rules('g-recaptcha-response', 'Checkbox', 'trim|xss_clean|required|callback__check_recaptcha');
+
+    public function foo(){
+        $this->form_validation->set_rules('g-recaptcha-response', 'Checkbox', 'trim|xss_clean|required|callback__check_recaptcha');
   
-    $this->data['show_captcha'] = TRUE;
+           $this->data['show_captcha'] = TRUE;
                 if ($this->data['use_recaptcha'] == 1) {
                     $this->data['recaptcha_html'] = $this->_create_recaptcha();
                 }
-                
-                /**
+          }
+     
+     
+    /**
      * Callback function. Check if reCAPTCHA test is passed.
      *
      * @access  public
@@ -17,9 +21,10 @@ Google v2 Codeigniter Recaptcha
      */
     public function _check_recaptcha()
     {
+     //add config key from google console
         $this->load->library('recaptcha', [
-            'public_key' => $this->authen->setting->recaptcha_public_key,
-            'private_key' => $this->authen->setting->recaptcha_private_key
+            'public_key' => $recaptcha_public_key,
+            'private_key' => $recaptcha_private_key
         ]);
 
         // Check if the form is submitted
@@ -40,9 +45,10 @@ Google v2 Codeigniter Recaptcha
      */
     public function _create_recaptcha()
     {
+    //add config key from google console
         $this->load->library('recaptcha', [
-            'public_key' => $this->authen->setting->recaptcha_public_key,
-            'private_key' => $this->authen->setting->recaptcha_private_key
+            'public_key' => $recaptcha_public_key,
+            'private_key' => $recaptcha_private_key
         ]);
 
         $html = $this->recaptcha->create_box();
